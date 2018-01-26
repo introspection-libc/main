@@ -26,8 +26,8 @@ mkdir softboundcets-3.8.0/llvm-38/build
 (cd softboundcets-3.8.0/runtime && make)
 ```
 
-How to build the vulnerable projects
-------------------------------------
+How to build the vulnerable projects with ASan
+----------------------------------------------
 
 ```sh
 # dnsmasq
@@ -41,12 +41,12 @@ make
 # libxml2
 cd $HOME/git/safe-libc-evaluation/cve/libxml2-v2.9.4
 ./autogen.sh
-./configure CC="$HOME/git/llvm-build/bin/clang" CFLAGS="-fsanitize=address -fno-common -g -O0 -include $HOME/git/safec/libc.h" LDFLAGS="-fsanitize=address -fno-common -g -O0 -Wl,-E" LIBS="$HOME/git/safec/libc.o"
+./configure CC="$HOME/git/llvm-build/bin/clang" CFLAGS="-fsanitize=address -fno-common -g -O0 -include $HOME/git/safec/libc.h" LDFLAGS="-fsanitize=address -fno-common -g -O0 -Wl,-E" LIBS="$HOME/git/safec/libc-asan.o"
 make
 
 # GraphicsMagick
 cd $HOME/git/safe-libc-evaluation/cve/GraphicsMagick-1.3.26
-./configure CC="$HOME/git/llvm-build/bin/clang" CXX="$HOME/git/llvm-build/bin/clang++" CFLAGS="-fsanitize=address -fno-common -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-fsanitize=address -fno-common -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-fsanitize=address -fno-common -g -O3 -Wl,-E" LIBS="$HOME/git/safec/libc.o"
+./configure CC="$HOME/git/llvm-build/bin/clang" CXX="$HOME/git/llvm-build/bin/clang++" CFLAGS="-fsanitize=address -fno-common -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-fsanitize=address -fno-common -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-fsanitize=address -fno-common -g -O3 -Wl,-E" LIBS="$HOME/git/safec/libc-asan.o"
 make
 ```
 
