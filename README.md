@@ -50,6 +50,18 @@ cd $HOME/git/safe-libc-evaluation/cve/GraphicsMagick-1.3.26
 make
 ```
 
+How to build and run the vulnerable projects with GCC's Intel-MPX-based Pointer Bounds Check
+--------------------------------------------------------------------------------------------
+
+```sh
+# build GraphicsMagick
+cd $HOME/git/safe-libc-evaluation/cve/mpx/GraphicsMagick-1.3.26
+./configure CC="gcc" CXX="g++" CFLAGS="-mmpx -fcheck-pointer-bounds -g -O0 -include $HOME/git/safec/libc.h" CXXFLAGS="-mmpx -fcheck-pointer-bounds -g -O0 -include $HOME/git/safec/libc.h" LDFLAGS="-lmpx -lmpxwrappers -O3 -Wl,-E" LIBS="$HOME/git/safec/libc-mpx.o $HOME/git/safec/mpx.o"
+make
+# run GraphicsMagick exploit
+CHKP_RT_MODE="stop" utilities/gm identify -verbose exploit.miff
+```
+
 Run the exploits
 ----------------
 
