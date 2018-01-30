@@ -45,7 +45,7 @@ python2 CVE-2017-14493.py ::1 547
 ```
 
 ### LightFTP
-```
+```sh
 # build
 cd $HOME/git/safe-libc-evaluation/cve/LightFTP-1.1/Source/Other/Release
 make
@@ -59,7 +59,7 @@ python -c 'print("USER admin\nPASS me\n" + "A"*499 + "B"*10 + "\x0D\x0A")' | nca
 ```
 
 ### libxml2
-```
+```sh
 # build
 cd $HOME/git/safe-libc-evaluation/cve/libxml2-v2.9.4
 ./autogen.sh
@@ -72,7 +72,7 @@ make
 ```
 
 ### GraphicsMagick
-```
+```sh
 # build
 cd $HOME/git/safe-libc-evaluation/cve/GraphicsMagick-1.3.26
 ./configure CC="$HOME/git/llvm-build/bin/clang" CXX="$HOME/git/llvm-build/bin/clang++" CFLAGS="-fsanitize=address -fno-common -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-fsanitize=address -fno-common -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-fsanitize=address -fno-common -g -O3 -Wl,-E" LIBS="$HOME/git/safec/libc-asan.o"
