@@ -139,6 +139,11 @@ CHKP_RT_MODE="stop" utilities/gm identify -verbose exploit.miff
 # expected output: backtrace followed by MPX report / crash
 ```
 
+How to build and run the vulnerable projects with SoftBound
+-----------------------------------------------------------
+The latest stable version of SoftBound failed to build the projects.
+However, the extracted fragments can be build and executed (see [here](https://github.com/introspection-libc/safe-libc-evaluation/tree/master/cve-extracted-fragments)).
+
 Modifications to the individual projects
 ----------------------------------------
 
