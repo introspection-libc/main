@@ -86,6 +86,34 @@ utilities/gm identify -verbose exploit.miff
 How to build and run the vulnerable projects with GCC's Intel-MPX-based Pointer Bounds Check
 --------------------------------------------------------------------------------------------
 
+### LightFTP
+```sh
+# build
+cd $HOME/git/safe-libc-evaluation/cve/mpx/LightFTP-1.1/Source/Other/Release
+make
+
+# run
+# in one terminal:
+CHKP_RT_MODE="stop" ./fftp fftp.cfg
+# in another terminal:
+python -c 'print("USER admin\nPASS me\n" + "A"*499 + "B"*10 + "\x0D\x0A")' | ncat 127.0.0.1 9999
+# expected output: LightFTP prints an error message and continues to run
+```
+
+### libxml2
+```sh
+# build
+cd $HOME/git/safe-libc-evaluation/cve/mpx/libxml2-v2.9.4
+./autogen.sh
+./configure CC="gcc" CXX="g++" CFLAGS="-mmpx -fcheck-pointer-bounds -g -O0 -include $HOME/git/safec/libc.h" CXXFLAGS="-mmpx -fcheck-pointer-bounds -g -O0 -include $HOME/git/safec/libc.h" LDFLAGS="-lmpx -lmpxwrappers -O3 -Wl,-E" LIBS="$HOME/git/safec/libc-mpx.o $HOME/git/safec/mpx.o"
+
+# run
+./xmllint --valid bug1.xml
+# expected output: validation error + backtrace to strcat, but no crash
+```
+
+
+### GraphicsMagick
 ```sh
 # build GraphicsMagick
 cd $HOME/git/safe-libc-evaluation/cve/mpx/GraphicsMagick-1.3.26
