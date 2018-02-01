@@ -86,6 +86,21 @@ utilities/gm identify -verbose exploit.miff
 How to build and run the vulnerable projects with GCC's Intel-MPX-based Pointer Bounds Check
 --------------------------------------------------------------------------------------------
 
+### dnsmasq
+```sh
+# build
+cd $HOME/git/safe-libc-evaluation/cve/mpx/dnsmasq-2.77
+make
+
+# run
+# in one terminal (as root, because port <1024):
+src/dnsmasq --no-daemon --dhcp-range=fd00::2,fd00::ff -p 54
+# in another terminal:
+python2 CVE-2017-14496.py localhost 54
+python2 CVE-2017-14493.py ::1 547
+# expected output: dnsmasq prints an error message and continues to run
+```
+
 ### LightFTP
 ```sh
 # build
@@ -121,6 +136,7 @@ cd $HOME/git/safe-libc-evaluation/cve/mpx/GraphicsMagick-1.3.26
 make
 # run GraphicsMagick exploit
 CHKP_RT_MODE="stop" utilities/gm identify -verbose exploit.miff
+# expected output: backtrace followed by MPX report / crash
 ```
 
 Modifications to the individual projects
