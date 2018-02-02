@@ -120,7 +120,7 @@ python -c 'print("USER admin\nPASS me\n" + "A"*499 + "B"*10 + "\x0D\x0A")' | nca
 # build
 cd $HOME/git/safe-libc-evaluation/cve/mpx/libxml2-v2.9.4
 ./autogen.sh
-./configure CC="gcc" CXX="g++" CFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-lmpx -lmpxwrappers -O3 -Wl,-E" LIBS="$HOME/git/safec/libc-mpx.o $HOME/git/safec/mpx.o"
+./configure CC="gcc" CXX="g++" CFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-lmpx -lmpxwrappers -O3 -D_FORTIFY_SOURCE=0 -Wl,-E" LIBS="$HOME/git/safec/libc-mpx.o $HOME/git/safec/mpx.o"
 
 # run
 ./xmllint --valid bug1.xml
@@ -132,7 +132,7 @@ cd $HOME/git/safe-libc-evaluation/cve/mpx/libxml2-v2.9.4
 ```sh
 # build GraphicsMagick
 cd $HOME/git/safe-libc-evaluation/cve/mpx/GraphicsMagick-1.3.26
-./configure CC="gcc" CXX="g++" CFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-lmpx -lmpxwrappers -O3 -Wl,-E" LIBS="$HOME/git/safec/libc-mpx.o $HOME/git/safec/mpx.o"
+./configure CC="gcc" CXX="g++" CFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" CXXFLAGS="-mmpx -fcheck-pointer-bounds -g -O3 -include $HOME/git/safec/libc.h" LDFLAGS="-lmpx -lmpxwrappers -O3 -D_FORTIFY_SOURCE=0 -Wl,-E" LIBS="$HOME/git/safec/libc-mpx.o $HOME/git/safec/mpx.o"
 make
 # run GraphicsMagick exploit
 CHKP_RT_MODE="stop" utilities/gm identify -verbose exploit.miff
