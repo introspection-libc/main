@@ -86,6 +86,8 @@ utilities/gm identify -verbose exploit.miff
 How to build and run the vulnerable projects with GCC's Intel-MPX-based Pointer Bounds Check
 --------------------------------------------------------------------------------------------
 
+**Note**: Intel MPX requires supported hardware, otherwise strange things will happen since the MPX portion in the safe-libc does *not* check if MPX hardware support is available!
+
 ### dnsmasq
 ```sh
 # build
